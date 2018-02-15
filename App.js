@@ -6,11 +6,16 @@ import { SecondScreen } from './SecondScreen.js'
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state;
-
     return {
       title: params ? params.pageTitle : 'Home Page',
     }
   }
+
+  // static navigationOptions = {
+  //   title: 'Home',
+  //   /* No more header config here! */
+  // };
+
 
   render() {
     return (
@@ -24,7 +29,11 @@ class HomeScreen extends React.Component {
             pageTitle:'SecondScreen!',
           });
         }}
-        />        
+        />
+        <Button
+          title="Update the title"
+          onPress={() => this.props.navigation.setParams({pageTitle: 'Updated!'})}
+        />
       </View>
     );
   }
@@ -54,6 +63,15 @@ const RootStack = StackNavigator(
   },
   {
     initialRouteName: 'Home',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
   }
 );
 
