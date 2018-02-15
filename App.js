@@ -4,13 +4,26 @@ import { StackNavigator } from 'react-navigation'; // 1.0.0-beta.27
 import { SecondScreen } from './SecondScreen.js'
 
 class HomeScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state;
+
+    return {
+      title: params ? params.pageTitle : 'Home Page',
+    }
+  }
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home Screen</Text>
         <Button
           title="Second Sreen"
-          onPress={() => this.props.navigation.navigate('SecondScreen')}
+          onPress={() => {this.props.navigation.navigate('SecondScreen', {
+            passedInt: 78,
+            passedTxt:'fo sho',
+            pageTitle:'SecondScreen!',
+          });
+        }}
         />        
       </View>
     );
